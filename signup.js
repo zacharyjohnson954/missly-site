@@ -115,7 +115,7 @@
         form.hidden = true;
         var done = document.getElementById("done");
         document.getElementById("done-msg").textContent = "Thanks, " + (data.owner_name.split(" ")[0] || "there") +
-          "! We got the info for " + data.business_name + ". Zach will reach out soon, usually within one business day, to set up your line.";
+          "! We got the info for " + data.business_name + ". Our onboarding team will reach out soon, usually within one business day, to set up your line.";
         done.hidden = false; done.focus();
       })
       .catch(function (e) {
@@ -128,7 +128,7 @@
         var a = document.createElement("a");
         a.href = "mailto:zach@missly.io?subject=" + encodeURIComponent("Missly signup: " + data.business_name) +
           "&body=" + encodeURIComponent(body);
-        a.textContent = "email them to Zach instead";
+        a.textContent = "email them to our team instead";
         err.appendChild(a); err.appendChild(document.createTextNode(" (email: zach@missly.io)."));
       })
       .finally(function () { sending = false; next.disabled = false; next.textContent = "Sign up for Missly"; });
