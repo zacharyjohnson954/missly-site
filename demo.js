@@ -102,14 +102,14 @@
       answers.urgent = URGENT.test(text);
       stage = 1;
       var ask = answers.urgent
-        ? "Sorry to hear that! Is water coming in right now? And what’s the address or nearest cross streets?"
+        ? "Sorry to hear that! Is water coming in right now? And what’s the full address of the home?"
         : /quote|new roof|replace|replacement/i.test(text)
-          ? "Happy to help with that. What’s the address or nearest cross streets, and about how old is the roof?"
-          : "We can help with that. What’s the address or nearest cross streets?";
+          ? "Happy to help with that. What’s the full address of the home, and about how old is the roof?"
+          : "We can help with that. What’s the full address of the home?";
       botSay(ask, function () {
         setChips(answers.urgent
-          ? ["Yes, it’s dripping. Shea and 64th St", "Not right now. Near Indian School and Hayden"]
-          : ["Near Indian School and Hayden, about 15 years old", "Shea and 64th St in Scottsdale"]);
+          ? ["Yes, it’s dripping. 6412 E Cactus Rd, Scottsdale", "Not right now. 2218 N 75th Pl, Scottsdale"]
+          : ["2218 N 75th Pl, Scottsdale. About 15 years old", "6412 E Cactus Rd, Scottsdale"]);
         setInput(true);
       });
     } else if (stage === 1) {
@@ -156,7 +156,7 @@
       (answers.name || "Unknown name") + " (602) 555-0148",
       "Need: " + answers.need,
       "Urgency: " + (urgent ? "HIGH" : "NORMAL"),
-      "Location: " + cleanWhere(answers.where),
+      "Address: " + cleanWhere(answers.where),
       "Best time: " + (answers.name ? cleanWhen(answers.when) : answers.when),
       "Reply DONE 12 once you’ve reached them."
     ];
