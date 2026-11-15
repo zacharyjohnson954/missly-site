@@ -18,7 +18,7 @@
     <a href="#how">How it works</a>
     <a href="#pricing">Pricing</a>
     <a href="#faq">Questions</a>
-    <a class="btn small nav-cta" href="#contact">Book a call</a>
+    <a class="btn small nav-cta" href="start.html">Get Missly</a>
   </nav>
 </div></header>
 
@@ -26,8 +26,8 @@
   <div>
     <h1>You're on a roof. The phone rings. Missly texts them back.</h1>
     <p class="lede">When you can't pick up, Missly texts the caller within seconds, finds out what they need, and sends you a summary so the job doesn't go to the next roofer on Google.</p>
-    <a class="btn" href="#contact">Book a 10-minute call</a>
-    <a class="textlink" href="#how">See how it works</a>
+    <a class="btn" href="start.html">Get Missly</a>
+    <a class="textlink" href="#try">Try it as a customer</a>
     <p class="fine">$197/month. No setup fee. Cancel anytime.</p>
   </div>
 
@@ -48,6 +48,61 @@
     </div>
   </div>
 </div></div>
+
+<section id="try"><div class="wrap try-wrap">
+  <div class="try-copy">
+    <h2>Be the customer for a minute</h2>
+    <p class="intro">Type your business name, then call it. Nobody will pick up, on purpose. Watch what your caller gets from Missly, and answer the texts like a homeowner would.</p>
+    <label class="field" for="demo-biz">Your business name
+      <input id="demo-biz" type="text" value="Desert Ridge Roofing" maxlength="40" autocomplete="organization">
+    </label>
+    <p class="fine">This is a simulation in your browser. No real calls or texts are sent.</p>
+    <div class="owner-alert" id="demo-alert" hidden>
+      <p class="from">Meanwhile, this text goes to you</p>
+      <div class="msg" id="demo-alert-msg"></div>
+      <a class="btn" href="start.html">Get Missly for my business</a>
+    </div>
+  </div>
+
+  <div class="phone demo-phone" aria-live="polite">
+    <div class="screen">
+      <div class="notch"></div>
+
+      <div class="demo-view" id="view-dial">
+        <div class="dial-name" id="dial-name">Desert Ridge Roofing</div>
+        <div class="dial-num">(480) 555-0199</div>
+        <button class="call-btn" id="demo-call" type="button" aria-label="Call this business">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/></svg>
+        </button>
+        <p class="dial-hint">Tap to call</p>
+      </div>
+
+      <div class="demo-view" id="view-calling" hidden>
+        <div class="dial-name" id="calling-name"></div>
+        <div class="call-status" id="call-status">Calling…</div>
+        <div class="ring" aria-hidden="true"><span></span><span></span><span></span></div>
+        <p class="voice" id="call-voice" hidden></p>
+        <button class="end-btn" type="button" tabindex="-1" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 9c-1.6 0-3.15.25-4.6.72v3.1a1 1 0 0 1-.56.9 11.5 11.5 0 0 0-2.66 1.85 1 1 0 0 1-1.41 0L.29 13.08a1 1 0 0 1 0-1.41A17 17 0 0 1 12 7a17 17 0 0 1 11.71 4.67 1 1 0 0 1 0 1.41l-2.48 2.49a1 1 0 0 1-1.41 0 11.3 11.3 0 0 0-2.66-1.85 1 1 0 0 1-.56-.9v-3.1A15 15 0 0 0 12 9z"/></svg>
+        </button>
+      </div>
+
+      <div class="demo-view" id="view-text" hidden>
+        <div class="thread-head"><strong id="text-name"></strong>Text message</div>
+        <div class="thread demo-thread" id="demo-thread"></div>
+        <div class="chips" id="demo-chips"></div>
+        <form class="compose" id="demo-form" autocomplete="off">
+          <input id="demo-input" type="text" placeholder="Text message" maxlength="160" aria-label="Type a reply">
+          <button type="submit" aria-label="Send">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M3 20.5 21 12 3 3.5 3 10l12 2-12 2z"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="wrap"><button class="textlink restart" id="demo-restart" type="button" hidden>Start the demo over</button></div>
+</section>
 
 <section id="how" class="light"><div class="wrap">
   <h2>How it works</h2>
@@ -87,7 +142,7 @@
     <div>
       <div class="amt">$197</div>
       <p class="per">per month, month to month</p>
-      <a class="btn" href="#contact">Book a 10-minute call</a>
+      <a class="btn" href="start.html">Get started</a>
     </div>
     <ul>
       <li>Instant text-back on every missed call</li>
@@ -113,8 +168,8 @@
 
 <section id="contact" class="contact"><div class="wrap">
   <h2>Stop losing jobs to voicemail</h2>
-  <p class="intro">Book a quick call and we'll show you how Missly would work for your business.</p>
-  <a class="btn" href="mailto:zach@missly.io?subject=Missly%20call">Email Zach</a>
+  <p class="intro">Sign up in about 5 minutes and we'll handle the setup. Rather talk first? Call or email Zach.</p>
+  <a class="btn" href="start.html">Get Missly</a>
   <div class="contact-lines">
     <div><span>Email</span><a href="mailto:zach@missly.io">zach@missly.io</a></div>
     <div><span>Phone</span><a href="tel:+14803530935">(480) 353-0935</a></div>
@@ -127,5 +182,6 @@
   <nav><a href="privacy.html">Privacy Policy</a><a href="terms.html">SMS Terms</a></nav>
 </div></footer>
 
+<script src="demo.js"></script>
 </body>
 </html>

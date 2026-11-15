@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get Missly | Sign up</title>
+<meta name="description" content="Sign up for Missly in about 5 minutes. Tell us about your business and we'll set up missed-call text-back for you.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="signup-page">
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="index.html" aria-label="Missly home">missly<i aria-hidden="true"></i></a>
+  <nav><a href="index.html#try">Try the demo</a><a href="index.html#faq">Questions</a></nav>
+</div></header>
+
+<main class="signup"><div class="wrap signup-wrap">
+
+  <aside class="signup-side">
+    <h1>Get Missly</h1>
+    <p>Tell us about your business. It takes about 5 minutes, and we do the setup for you.</p>
+    <ol class="progress" id="progress" aria-label="Signup steps">
+      <li data-step="1">Your business</li>
+      <li data-step="2">Phones and contact</li>
+      <li data-step="3">How you work</li>
+      <li data-step="4">Review and finish</li>
+    </ol>
+    <p class="fine">$197/month after you're live. No setup fee, no contract. Nothing is charged today.</p>
+  </aside>
+
+  <form class="signup-card" id="signup" novalidate>
+    <input type="text" name="company_url" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+    <fieldset class="step" data-step="1">
+      <legend>Your business</legend>
+      <label class="field">Business name
+        <input name="business_name" required maxlength="80" autocomplete="organization" placeholder="Desert Ridge Roofing">
+        <span class="hint">This is the name your callers will see in the texts.</span>
+      </label>
+      <label class="field">What kind of business?
+        <select name="industry" required>
+          <option value="">Choose one</option>
+          <option>Roofing</option><option>Dental</option><option>HVAC</option><option>Plumbing</option>
+          <option>Electrical</option><option>Landscaping</option><option>Other home services</option><option>Other</option>
+        </select>
+      </label>
+      <label class="field">Website <span class="opt">(optional)</span>
+        <input name="website" type="url" maxlength="200" placeholder="https://" inputmode="url">
+      </label>
+    </fieldset>
+
+    <fieldset class="step" data-step="2" hidden>
+      <legend>Phones and contact</legend>
+      <label class="field">Business phone number
+        <input name="business_phone" type="tel" required autocomplete="tel" placeholder="(480) 555-0199">
+        <span class="hint">The number your customers call today. You keep it.</span>
+      </label>
+      <label class="field">Your name
+        <input name="owner_name" required maxlength="60" autocomplete="name" placeholder="First and last name">
+      </label>
+      <label class="field">Your cell phone
+        <input name="cell_phone" type="tel" required autocomplete="tel" placeholder="(602) 555-0123">
+        <span class="hint">Calls ring here first, and lead summaries are texted here.</span>
+      </label>
+      <label class="field">Email
+        <input name="email" type="email" required autocomplete="email" placeholder="you@yourbusiness.com">
+      </label>
+      <label class="field">Anyone else who should get lead alerts? <span class="opt">(optional)</span>
+        <input name="alert_phones" maxlength="200" placeholder="Office manager's cell, for example">
+      </label>
+    </fieldset>
+
+    <fieldset class="step" data-step="3" hidden>
+      <legend>How you work</legend>
+      <label class="field">What services do you offer?
+        <textarea name="services" required maxlength="600" placeholder="Roof repairs, leak repair, full replacements, inspections, storm damage"></textarea>
+        <span class="hint">Missly uses this to answer callers and ask the right questions.</span>
+      </label>
+      <label class="field">What areas do you serve?
+        <input name="service_area" required maxlength="200" placeholder="Phoenix, Scottsdale, Tempe, Mesa">
+      </label>
+      <label class="field">Business hours
+        <input name="hours" maxlength="120" value="Mon-Sat 7am-6pm">
+        <span class="hint">Missly won't text callers late at night.</span>
+      </label>
+      <label class="field">Online booking link <span class="opt">(optional)</span>
+        <input name="booking_link" type="url" maxlength="200" placeholder="https://" inputmode="url">
+      </label>
+      <label class="field">Anything Missly should always or never say? <span class="opt">(optional)</span>
+        <textarea name="notes" maxlength="600" placeholder="Never quote prices by text. We offer free inspections."></textarea>
+      </label>
+    </fieldset>
+
+    <fieldset class="step" data-step="4" hidden>
+      <legend>Review and finish</legend>
+      <dl class="review" id="review"></dl>
+      <label class="field">How did you hear about Missly? <span class="opt">(optional)</span>
+        <input name="how_heard" maxlength="120">
+      </label>
+      <label class="agree">
+        <input type="checkbox" name="agreed" required>
+        <span>I agree to the <a href="terms.html" target="_blank">SMS Terms</a> and <a href="privacy.html" target="_blank">Privacy Policy</a>, and understand that people who call my business and don't reach us will get texts from Missly in my business's name.</span>
+      </label>
+      <div class="next-steps">
+        <h3>What happens next</h3>
+        <ol>
+          <li>Zach reviews your info and reaches out, usually within one business day.</li>
+          <li>We set up call forwarding together. It takes about 15 minutes.</li>
+          <li>We run a test call so you see exactly what your callers get.</li>
+          <li>You're live. Billing starts only after that.</li>
+        </ol>
+      </div>
+    </fieldset>
+
+    <p class="form-error" id="form-error" role="alert" hidden></p>
+
+    <div class="nav-row">
+      <button type="button" class="back" id="back" hidden>Back</button>
+      <button type="submit" class="btn" id="next">Continue</button>
+    </div>
+  </form>
+
+  <section class="signup-card done" id="done" hidden tabindex="-1">
+    <h2>You're in</h2>
+    <p id="done-msg">Thanks! We got your info. Zach will reach out soon, usually within one business day, to set up your line.</p>
+    <p>Questions in the meantime? Email <a href="mailto:zach@missly.io">zach@missly.io</a> or call <a href="tel:+14803530935">(480) 353-0935</a>.</p>
+    <a class="btn" href="index.html#try">Try the customer demo again</a>
+  </section>
+
+</div></main>
+
+<footer><div class="wrap">
+  <p>&copy; 2026 Missly, a service of Johnson Exteriors LLC, Scottsdale, Arizona</p>
+  <nav><a href="privacy.html">Privacy Policy</a><a href="terms.html">SMS Terms</a></nav>
+</div></footer>
+
+<script src="signup.js"></script>
+</body>
+</html>
