@@ -115,7 +115,7 @@
         form.hidden = true;
         var done = document.getElementById("done");
         document.getElementById("done-msg").textContent = "Thanks, " + (data.owner_name.split(" ")[0] || "there") +
-          "! We got the info for " + data.business_name + ". Our onboarding team will reach out soon, usually within one business day, to set up your line.";
+          "! We got the info for " + data.business_name + ". Check your inbox for a welcome email. Our onboarding team will set up your line, usually within one business day, and email you a 2-minute setup guide.";
         done.hidden = false; done.focus();
       })
       .catch(function (e) {

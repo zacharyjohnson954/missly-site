@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Turn on Missly | Setup guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="index.html" aria-label="Missly home">missly<i aria-hidden="true"></i></a>
+  <nav><a href="mailto:zach@missly.io">Get help</a></nav>
+</div></header>
+
+<main class="setup"><div class="wrap setup-wrap">
+
+  <h1>Turn on Missly<span id="for-biz"></span></h1>
+  <p class="lede">One code, dialed once from your business phone. About 2 minutes. After this, any call you don't answer goes to Missly, and your caller gets a text right away.</p>
+
+  <div class="number-card" id="number-card">
+    <span class="label">Your Missly number</span>
+    <strong id="missly-num">(xxx) xxx-xxxx</strong>
+    <span class="label">Keep giving customers your normal business number. This one works behind the scenes.</span>
+  </div>
+  <div class="form-error" id="no-number" hidden>This link is missing your Missly number. Open the link from your setup email, or <a href="mailto:zach@missly.io">email us</a> and we'll resend it.</div>
+
+  <ol class="guide">
+    <li>
+      <h2>Which company provides your business phone?</h2>
+      <p>Pick the one on your bill. If your business number rings a cell phone, it's that cell phone's carrier.</p>
+      <div class="carriers" role="radiogroup" aria-label="Phone company">
+        <button type="button" role="radio" aria-checked="false" data-c="verizon">Verizon</button>
+        <button type="button" role="radio" aria-checked="false" data-c="att">AT&amp;T</button>
+        <button type="button" role="radio" aria-checked="false" data-c="tmobile">T-Mobile</button>
+        <button type="button" role="radio" aria-checked="false" data-c="visible">Visible</button>
+        <button type="button" role="radio" aria-checked="false" data-c="cricket">Cricket</button>
+        <button type="button" role="radio" aria-checked="false" data-c="metro">Metro</button>
+        <button type="button" role="radio" aria-checked="false" data-c="mint">Mint</button>
+        <button type="button" role="radio" aria-checked="false" data-c="office">Office or landline</button>
+        <button type="button" role="radio" aria-checked="false" data-c="unsure">Not sure</button>
+      </div>
+    </li>
+
+    <li id="step-dial" class="locked">
+      <h2>Dial this code from your business phone</h2>
+      <div id="dial-cell" hidden>
+        <p>Open the Phone app on the phone your business number rings, go to the keypad, and dial exactly:</p>
+        <div class="code-row">
+          <code id="code-on">–</code>
+          <button type="button" class="copy" id="copy-on">Copy</button>
+        </div>
+        <p>Press <b>Call</b>. You'll hear a tone or see a message that forwarding is on, then it hangs up on its own. Done.</p>
+        <p class="fine" id="dial-note"></p>
+      </div>
+      <div id="dial-office" hidden>
+        <p>Office phone systems and landlines are set up online or with a quick call to your phone company. Look for a setting called <b>“Forward when no answer”</b> or <b>“Call forward busy / no answer”</b> and set it to your Missly number above.</p>
+        <ul class="plain">
+          <li><b>RingCentral, Grasshopper, Dialpad, Ooma, Google Voice and similar:</b> sign in to the admin website, open your call handling or call rules, and set unanswered calls to forward to your Missly number.</li>
+          <li><b>Comcast, Cox, CenturyLink or another landline:</b> call their business support and say: “Please turn on call forwarding when there's no answer or the line is busy, to [your Missly number].”</li>
+        </ul>
+        <p>Stuck? Reply to your setup email and we'll do it with you on a 10-minute call.</p>
+      </div>
+      <div id="dial-unsure" hidden>
+        <p>No problem. Reply to your setup email with your business phone number, or call us at <a href="tel:+14803530935">(480) 353-0935</a>, and we'll figure it out together in a few minutes.</p>
+      </div>
+    </li>
+
+    <li id="step-test" class="locked">
+      <h2>Test it</h2>
+      <p>From a <b>different phone</b> (a friend's or a second line), call your business number and don't answer. Let it ring out.</p>
+      <p>The caller should hear a short message, then get a text from Missly within a few seconds. You'll get the lead summary on your cell.</p>
+      <details class="tips"><summary>It went to voicemail instead</summary>
+        <ul class="plain">
+          <li>Make sure you dialed the code from the business phone itself, then wait a minute and try again.</li>
+          <li><b>iPhone:</b> turn off Live Voicemail in Settings, then Apps, then Phone. It can answer before forwarding kicks in.</li>
+          <li>Don't decline the test call. Let it ring until it stops. Declining can send it straight to voicemail.</li>
+          <li>Still not working? Reply to your setup email and we'll sort it out with you.</li>
+        </ul>
+      </details>
+    </li>
+
+    <li id="step-done" class="locked">
+      <h2>Tell us you're done</h2>
+      <p>We'll run a final check on our side and confirm you're live.</p>
+      <button type="button" class="btn" id="done-btn">I'm all set</button>
+      <p class="done-msg" id="done-msg" role="status" hidden></p>
+      <p class="fine" id="turn-off"></p>
+    </li>
+  </ol>
+
+</div></main>
+
+<footer><div class="wrap">
+  <p>&copy; 2026 Missly, a service of Johnson Exteriors LLC, Scottsdale, Arizona</p>
+  <nav><a href="privacy.html">Privacy Policy</a><a href="terms.html">SMS Terms</a></nav>
+</div></footer>
+
+<script src="setup.js"></script>
+</body>
+</html>
