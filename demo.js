@@ -8,7 +8,7 @@
 
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var URGENT = /\b(leak|leaking|leaks|water|dripping|drip|emergency|asap|urgent|storm|flood|hole|tarp)\b/i;
-  var timers = [], stage = 0, answers = {}, busy = false;
+  var timers = [], stage = 0, answers = {}, busy = false, ghosts = 0, currentChips = [];
 
   function later(fn, ms) { timers.push(setTimeout(fn, reduce ? Math.min(ms, 300) : ms)); }
   function biz() { return (bizInput.value || "").trim() || "Desert Ridge Roofing"; }
@@ -41,6 +41,7 @@
   function setInput(on) { input.disabled = !on; form.querySelector("button").disabled = !on; }
 
   function setChips(list) {
+    currentChips = list;
     chips.innerHTML = "";
     list.forEach(function (c) {
       var b = document.createElement("button");
@@ -48,6 +49,76 @@
       b.addEventListener("click", function () { answer(c); });
       chips.appendChild(b);
     });
+    if (stage < 3 && ghosts < 4) {
+      var g = document.createElement("button");
+      g.type = "button"; g.className = "ghost";
+      g.textContent = "Ignore it (go quiet)";
+      g.setAttribute("aria-label", "Don't reply, and see how Missly follows up");
+      g.addEventListener("click", ghost);
+      chips.appendChild(g);
+    }
+  }
+
+  // ---- going quiet: follow-ups at +2h, next morning, +3 days, then a "worth a call" alert
+  function sysNote(text, cls) {
+    var n = document.createElement("div");
+    n.className = "stamp " + (cls || ""); n.textContent = text;
+    thread.appendChild(n); thread.scrollTop = thread.scrollHeight;
+  }
+  var GAPS = ["No reply… 2 hours later, 4:14 PM", "Still quiet… next morning, 10:02 AM", "Still quiet… 3 days later, 10:05 AM"];
+  function followupText(n) {
+    var b = biz();
+    if (n === 3) return "Last check-in from " + b + ". No pressure at all. If you still need help, just text or call this number anytime.";
+    if (stage === 0) return n === 1
+      ? "Hi, just checking in from " + b + ". Still need help with your roof? Reply anytime."
+      : "Good morning from " + b + "! We'd still love to help. Is it a repair, a leak, or a new roof?";
+    if (stage === 1) return n === 1
+      ? (answers.urgent ? "Checking in from " + b + ". Is the leak still coming in? Send the address and we'll get someone out fast."
+                        : "Hi again from " + b + "! Still happy to help with that. What's the address of the home?")
+      : "Morning! " + b + " here. We have openings this week. What's the address so we can get someone out?";
+    return n === 1
+      ? "Quick follow-up from " + b + ": what's your name, and when's a good time for us to come by?"
+      : "Morning! " + b + " here. We can usually come out within a day or two. What time works for you?";
+  }
+  function ghost() {
+    if (busy || stage > 2) return;
+    chips.innerHTML = ""; setInput(false);
+    ghosts++;
+    if (ghosts <= 3) {
+      busy = true;
+      later(function () {
+        sysNote(GAPS[ghosts - 1], "gap");
+        if (ghosts === 2) sysNote("Missly waited for business hours. No late-night texts.", "why");
+        busy = false;
+        botSay(followupText(ghosts), function () {
+          sysNote("Follow-up " + ghosts + " of 3", "why");
+          setChips(currentChips); setInput(true);
+        });
+      }, 500);
+    } else {
+      stage = 4;
+      later(function () {
+        sysNote("No reply after 3 follow-ups", "gap");
+        sysNote("Missly stops here so it never feels like spam, and hands it to you.", "why");
+        coldAlert();
+      }, 500);
+    }
+  }
+  function coldAlert() {
+    var lines = [
+      "Cold lead for " + biz() + ": worth a phone call",
+      "Caller (602) 555-0148",
+      "Need: " + (answers.need || "not given yet"),
+      answers.where ? "Address: " + cleanWhere(answers.where) : "Address: not given yet",
+      "No reply after 3 follow-up texts over 4 days.",
+      "Reply DONE 12 once you've reached them."
+    ];
+    $("demo-alert").querySelector(".from").textContent = "Missly tried 3 times, then sent you this";
+    alertMsg.textContent = lines.join("\n");
+    later(function () {
+      alertBox.hidden = false;
+      if (window.innerWidth < 860) alertBox.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+    }, 900);
   }
 
   // ---- the call
@@ -94,6 +165,7 @@
 
   function answer(text) {
     if (busy || stage > 2) return;
+    if (ghosts && !answers.recovered) answers.recovered = ghosts;
     bubble(text, "in");
     input.value = ""; chips.innerHTML = ""; setInput(false);
 
@@ -153,13 +225,16 @@
     var urgent = answers.urgent;
     var lines = [
       (urgent ? "URGENT - " : "") + "New lead for " + biz() + ": " + (urgent ? "Urgent" : "Ready for a callback"),
+    ].concat(answers.recovered ? ["Recovered: went quiet, replied after follow-up #" + answers.recovered] : []).concat([
       (answers.name || "Unknown name") + " (602) 555-0148",
       "Need: " + answers.need,
       "Urgency: " + (urgent ? "HIGH" : "NORMAL"),
       "Address: " + cleanWhere(answers.where),
       "Best time: " + (answers.name ? cleanWhen(answers.when) : answers.when),
       "Reply DONE 12 once you’ve reached them."
-    ];
+    ]);
+    $("demo-alert").querySelector(".from").textContent = answers.recovered
+      ? "Missly brought this lead back. This text goes to you" : "Meanwhile, this text goes to you";
     alertMsg.textContent = lines.join("\n");
     later(function () {
       alertBox.hidden = false;
@@ -169,7 +244,7 @@
 
   restart.addEventListener("click", function () {
     timers.forEach(clearTimeout); timers = [];
-    stage = 0; answers = {}; busy = false;
+    stage = 0; answers = {}; busy = false; ghosts = 0; currentChips = [];
     thread.innerHTML = ""; chips.innerHTML = ""; input.value = "";
     alertBox.hidden = true; restart.hidden = true; bizInput.disabled = false;
     setInput(false); show("view-dial");

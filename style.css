@@ -245,3 +245,21 @@ footer nav{display:flex;gap:20px}
 .done-msg{background:#E9F8EF;border:2px solid #22B14C;border-radius:14px;padding:12px 16px;font-weight:700;max-width:60ch}
 #done-btn{cursor:pointer;font-family:var(--body);font-size:1.05rem}
 @media(max-width:520px){.guide>li{padding-left:56px}}
+
+.chips button.ghost{color:var(--ink-soft);border-color:var(--line);border-style:dashed;background:#F7F9FB}
+.chips button.ghost:hover{background:#EEF2F6}
+.stamp.gap{display:flex;align-items:center;gap:8px;width:100%;font-weight:700;color:var(--ink);margin:10px 0 4px}
+.stamp.gap::before,.stamp.gap::after{content:"";flex:1;border-top:1px dashed var(--line)}
+.stamp.why{font-style:italic;max-width:90%;text-align:center}
+
+/* when customers go quiet */
+.quiet-steps{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;counter-reset:q;margin-top:8px}
+.quiet-steps li{background:var(--paper);border:2px solid var(--ink);border-radius:20px;padding:20px 18px;position:relative}
+.quiet-steps .when{display:inline-block;font:800 .85rem var(--display);background:var(--sky);border-radius:999px;padding:4px 10px;margin-bottom:12px}
+.quiet-steps li:last-child{background:var(--sun)}
+.quiet-steps li:last-child .when{background:var(--paper)}
+.quiet-steps .msg{background:var(--blue);color:#fff;border-radius:16px;border-bottom-right-radius:5px;padding:9px 12px;font-size:.92rem;line-height:1.35;margin:4px 0 10px}
+.quiet-steps p{font-size:.95rem;color:var(--ink-soft)}
+.quiet-steps li:last-child p{color:var(--ink)}
+@media(max-width:900px){.quiet-steps{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.quiet-steps{grid-template-columns:1fr}}
