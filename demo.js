@@ -59,26 +59,26 @@
     }
   }
 
-  // ---- going quiet: follow-ups at +2h, next morning, +3 days, then a "worth a call" alert
+  // ---- going quiet: follow-ups at +2h, next day, +3 days, then a "worth a call" alert
   function sysNote(text, cls) {
     var n = document.createElement("div");
     n.className = "stamp " + (cls || ""); n.textContent = text;
     thread.appendChild(n); thread.scrollTop = thread.scrollHeight;
   }
-  var GAPS = ["No reply… 2 hours later, 4:14 PM", "Still quiet… next morning, 10:02 AM", "Still quiet… 3 days later, 10:05 AM"];
+  var GAPS = ["No reply… 2 hours later, 4:14 PM", "Still quiet… next day, 4:16 PM", "Still quiet… 3 days later, 4:18 PM"];
   function followupText(n) {
     var b = biz();
     if (n === 3) return "Last check-in from " + b + ". No pressure at all. If you still need help, just text or call this number anytime.";
     if (stage === 0) return n === 1
       ? "Hi, just checking in from " + b + ". Still need help with your roof? Reply anytime."
-      : "Good morning from " + b + "! We'd still love to help. Is it a repair, a leak, or a new roof?";
+      : "Hi again from " + b + "! We'd still love to help. Is it a repair, a leak, or a new roof?";
     if (stage === 1) return n === 1
       ? (answers.urgent ? "Checking in from " + b + ". Is the leak still coming in? Send the address and we'll get someone out fast."
                         : "Hi again from " + b + "! Still happy to help with that. What's the address of the home?")
-      : "Morning! " + b + " here. We have openings this week. What's the address so we can get someone out?";
+      : "Hi! " + b + " here. We have openings this week. What's the address so we can get someone out?";
     return n === 1
       ? "Quick follow-up from " + b + ": what's your name, and when's a good time for us to come by?"
-      : "Morning! " + b + " here. We can usually come out within a day or two. What time works for you?";
+      : "Hi! " + b + " here. We can usually come out within a day or two. What time works for you?";
   }
   function ghost() {
     if (busy || stage > 2) return;
@@ -88,7 +88,7 @@
       busy = true;
       later(function () {
         sysNote(GAPS[ghosts - 1], "gap");
-        if (ghosts === 2) sysNote("Missly waited for business hours. No late-night texts.", "why");
+        if (ghosts === 2) sysNote("Missly only texts during business hours. Never late at night.", "why");
         busy = false;
         botSay(followupText(ghosts), function () {
           sysNote("Follow-up " + ghosts + " of 3", "why");
@@ -110,7 +110,7 @@
       "Caller (602) 555-0148",
       "Need: " + (answers.need || "not given yet"),
       answers.where ? "Address: " + cleanWhere(answers.where) : "Address: not given yet",
-      "No reply after 3 follow-up texts over 4 days.",
+      "No reply after 3 follow-up texts over 5 days.",
       "Reply DONE 12 once you've reached them."
     ];
     $("demo-alert").querySelector(".from").textContent = "Missly tried 3 times, then sent you this";
