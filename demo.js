@@ -52,7 +52,7 @@
     if (stage < 3 && ghosts < 4) {
       var g = document.createElement("button");
       g.type = "button"; g.className = "ghost";
-      g.textContent = "Ignore it (go quiet)";
+      g.textContent = "Ignore it (like a real customer)";
       g.setAttribute("aria-label", "Don't reply, and see how Missly follows up");
       g.addEventListener("click", ghost);
       chips.appendChild(g);

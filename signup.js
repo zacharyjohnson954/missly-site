@@ -71,7 +71,7 @@
       if (i === n - 1) li.setAttribute("aria-current", "step"); else li.removeAttribute("aria-current");
     });
     back.hidden = n === 1;
-    next.textContent = n === total ? "Sign up for Missly" : "Continue";
+    next.textContent = n === total ? "Sign me up" : "Next";
     showError("");
     if (n === total) buildReview();
     var first = steps[n - 1].querySelector("input:not(.hp), select, textarea");
@@ -131,7 +131,7 @@
         a.textContent = "email them to our team instead";
         err.appendChild(a); err.appendChild(document.createTextNode(" (email: zach@missly.io)."));
       })
-      .finally(function () { sending = false; next.disabled = false; next.textContent = "Sign up for Missly"; });
+      .finally(function () { sending = false; next.disabled = false; next.textContent = "Sign me up"; });
   }
 
   go(1, true);

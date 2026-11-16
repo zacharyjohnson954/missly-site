@@ -263,3 +263,11 @@ footer nav{display:flex;gap:20px}
 .quiet-steps li:last-child p{color:var(--ink)}
 @media(max-width:900px){.quiet-steps{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.quiet-steps{grid-template-columns:1fr}}
+
+/* the "upsell me" joke */
+.upsell{margin-top:22px;display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px;background:var(--paper);border:2px dashed var(--ink);border-radius:22px;padding:22px 26px}
+.upsell>div{flex:1;min-width:220px}
+.upsell h3{margin-bottom:4px}
+.upsell p{color:var(--ink-soft)}
+.ghost-btn{background:var(--paper);cursor:pointer;font-family:var(--body);font-size:1rem}
+.upsell-msg{flex-basis:100%;font-weight:700;color:var(--ink)!important}
