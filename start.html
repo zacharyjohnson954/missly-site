@@ -43,8 +43,9 @@
       <label class="field">What kind of business?
         <select name="industry" required>
           <option value="">Choose one</option>
-          <option>Roofing</option><option>Dental</option><option>HVAC</option><option>Plumbing</option>
-          <option>Electrical</option><option>Landscaping</option><option>Other home services</option><option>Other</option>
+          <option>Roofing</option><option>Water treatment / filtration</option><option>Hardscaping</option><option>Landscaping</option>
+          <option>HVAC</option><option>Plumbing</option><option>Electrical</option><option>Pest control</option><option>Pool service</option>
+          <option>Dental</option><option>Other service business</option>
         </select>
       </label>
       <label class="field">Website <span class="opt">(optional)</span>
@@ -138,5 +139,10 @@
 </div></footer>
 
 <script src="signup.js"></script>
+<script>
+(function(){var sel=document.querySelector('select[name="industry"]');if(!sel||sel.value)return;
+var map={roofing:"Roofing",water:"Water treatment / filtration",hardscape:"Hardscaping"},k;
+try{k=localStorage.getItem("missly-ind")}catch(e){}if(map[k])sel.value=map[k];})();
+</script>
 </body>
 </html>

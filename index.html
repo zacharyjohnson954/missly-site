@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Missly | Missed calls, texted back in seconds</title>
-<meta name="description" content="Missly texts back every caller you miss, finds out what they need, and sends you a summary. Built for roofers and local service businesses in the Phoenix area. $197/month, no contract.">
+<meta name="description" content="Missly texts back every caller you miss, finds out what they need, and sends you a summary. Built for roofers, water treatment companies, hardscapers, and any service business that misses calls. $197/month, no contract.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
@@ -25,11 +25,12 @@
 
 <div class="hero"><div class="wrap">
   <div>
+    <div class="ind-row"><span class="ind-label" id="ind-label-hero">I run a</span><div class="ind-pick" role="group" aria-labelledby="ind-label-hero"></div></div>
     <h1>You missed a call. Missly texted them back.</h1>
-    <p class="lede">That's the whole product. When you can't answer, Missly texts the caller in seconds, finds out what they need, and sends you the details. The job doesn't go to the next roofer on Google. You stay on the roof.</p>
+    <p class="lede" data-t="lede">That's the whole product. When you can't answer, Missly texts the caller in seconds, finds out what they need, and sends you the details. The job doesn't go to the next roofer on Google. You stay on the roof.</p>
     <a class="btn" href="start.html">Get Missly</a>
     <a class="textlink" href="#try">Try it on yourself</a>
-    <p class="fine">$197/month. No setup fee. No contract. No “let's hop on a call.”</p>
+    <p class="fine">$197/month. No setup fee. No contract. No “let's hop on a call.”<br>Works for any service business that misses calls.</p>
   </div>
 
   <div class="phone" role="img" aria-label="Example: a missed call followed by an automatic text conversation with the caller">
@@ -39,12 +40,12 @@
         <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/><path d="M17 3l5 5M22 3l-5 5"/></svg></div>
         <div><b>Missed call</b><span>(602) 555-0148, 2:14 PM</span></div>
       </div>
-      <div class="thread-head seq s2"><strong>Desert Ridge Roofing</strong>Text message</div>
+      <div class="thread-head seq s2"><strong data-t-name>Desert Ridge Roofing</strong>Text message</div>
       <div class="thread">
-        <div class="bubble out seq s3">Hi, this is Desert Ridge Roofing. Sorry we missed your call! What can we help with?</div>
-        <div class="bubble in seq s4">Got a leak over the garage after last night's storm</div>
-        <div class="bubble out seq s5">Sorry to hear that. What's the full address, and is water coming in right now?</div>
-        <div class="bubble in seq s6">6412 E Cactus Rd, Scottsdale. Dripping a little, yes</div>
+        <div class="bubble out seq s3" data-t-hello>Hi, this is Desert Ridge Roofing. Sorry we missed your call! What can we help with?</div>
+        <div class="bubble in seq s4" data-t="hero0">Got a leak over the garage after last night's storm</div>
+        <div class="bubble out seq s5" data-t="hero1">Sorry to hear that. What's the full address, and is water coming in right now?</div>
+        <div class="bubble in seq s6" data-t="hero2">6412 E Cactus Rd, Scottsdale. Dripping a little, yes</div>
       </div>
     </div>
   </div>
@@ -53,6 +54,7 @@
 <section id="try"><div class="wrap try-wrap">
   <div class="try-copy">
     <h2>Pretend you're a customer. We won't tell.</h2>
+    <div class="ind-row"><span class="ind-label" id="ind-label-try">Your trade</span><div class="ind-pick" role="group" aria-labelledby="ind-label-try"></div></div>
     <p class="intro">Type your business name and call it. Nobody picks up (on purpose). Text back like a normal person, or ignore it like a real one and watch Missly follow up.</p>
     <label class="field" for="demo-biz">Your business name
       <input id="demo-biz" type="text" value="Desert Ridge Roofing" maxlength="40" autocomplete="organization">
@@ -109,7 +111,7 @@
   <h2>How it works (it's not complicated)</h2>
   <p class="intro">Lots of people hang up on voicemail and call someone else. Missly keeps them talking until you can call back.</p>
   <ol class="steps">
-    <li><h3>Someone calls. You're busy.</h3><p>On a roof, driving, eating lunch. Your phone rings like normal first.</p></li>
+    <li><h3>Someone calls. You're busy.</h3><p data-t="busy">On a roof, driving, eating lunch. Your phone rings like normal first.</p></li>
     <li><h3>Missly texts them</h3><p>Within seconds, in your business's name. Friendly, not robotic.</p></li>
     <li><h3>It asks the stuff you'd ask</h3><p>Name, address, what's wrong, how urgent, when you can come by.</p></li>
     <li><h3>You get the good stuff</h3><p>One text with everything you need to call them back. That's it.</p></li>
@@ -121,7 +123,7 @@
     <h2>What you get: a text, not another app</h2>
     <p class="intro">One clear text per lead. Every lead is also saved to a simple dashboard, for when you feel organized.</p>
     <ul class="checks">
-      <li>Urgent stuff flagged first. Leaks don't wait.</li>
+      <li data-t="urgentLine">Urgent stuff flagged first. Leaks don't wait.</li>
       <li>Up to 3 follow-ups if they go quiet. Polite, not clingy.</li>
       <li>No texts at 2am. Never quotes prices for you. That's your job.</li>
       <li>Callers can reply STOP anytime, and Missly actually stops.</li>
@@ -130,8 +132,8 @@
   <div class="alert" role="img" aria-label="Example lead summary text sent to the business owner">
     <p class="from">New lead from Missly</p>
     <div class="msg">
-      <b>Urgent: active leak</b>
-      Maria G., 6412 E Cactus Rd, Scottsdale. Storm leak over the garage, water dripping now. Wants someone out today or tomorrow morning. Call (602) 555-0148.
+      <b data-t="alertTitle">Urgent: active leak</b>
+      <span data-t="alertBody">Maria G., 6412 E Cactus Rd, Scottsdale. Storm leak over the garage, water dripping now. Wants someone out today or tomorrow morning. Call (602) 555-0148.</span>
     </div>
   </div>
 </div></section>
@@ -140,8 +142,8 @@
   <h2>When they ghost you, Missly doesn't take it personally</h2>
   <p class="intro">People get busy. Missly nudges them three times, nicely, then hands them back to you.</p>
   <ol class="quiet-steps">
-    <li><span class="when">2 hours later</span><div class="msg">Hi, just checking in. Still need help with your roof? Reply anytime.</div><p>A light nudge while they still remember calling.</p></li>
-    <li><span class="when">Next day</span><div class="msg">Hi again! We'd still love to help. Is it a repair, a leak, or a new roof?</div><p>Only during business hours. Never late at night.</p></li>
+    <li><span class="when">2 hours later</span><div class="msg" data-t="q1">Hi, just checking in. Still need help with your roof? Reply anytime.</div><p>A light nudge while they still remember calling.</p></li>
+    <li><span class="when">Next day</span><div class="msg" data-t="q2">Hi again! We'd still love to help. Is it a repair, a leak, or a new roof?</div><p>Only during business hours. Never late at night.</p></li>
     <li><span class="when">3 days later</span><div class="msg">Last check-in. No pressure at all. Text or call anytime.</div><p>One last try, then it stops. We're not that kind of company.</p></li>
     <li><span class="when">Then it's your turn</span><p><b>You get a “worth a call” alert</b> with everything Missly learned, so you can pick up the phone. If they reply at any point, Missly picks the conversation right back up.</p></li>
   </ol>
@@ -149,7 +151,7 @@
 
 <section id="pricing"><div class="wrap">
   <h2>Pricing: one price, no tricks</h2>
-  <p class="intro">No tiers, no “contact sales,” no plan that's mysteriously 4x the price. One saved roofing job pays for Missly for a long time.</p>
+  <p class="intro">No tiers, no “contact sales,” no plan that's mysteriously 4x the price. <span data-t="price">One saved roofing job pays for Missly for a long time.</span></p>
   <div class="price">
     <div>
       <div class="amt">$197</div>
@@ -182,7 +184,7 @@
     <details><summary>Will customers know it's automated?</summary><p>Texts come from your business name and read like a helpful office assistant. If someone asks, Missly tells the truth: it's your automated assistant. If they want a real human, it pings you right away.</p></details>
     <details><summary>Is it allowed to text callers?</summary><p>Missly only texts people who called you first, identifies your business in every conversation, and stops immediately if someone replies STOP. See our <a href="terms.html">SMS Terms</a>.</p></details>
     <details><summary>Is there a contract?</summary><p>No. Month to month. Cancel anytime, no breakup speech required.</p></details>
-    <details><summary>Is it only for roofers?</summary><p>We started with roofers because they're always on roofs. It works for any local business that misses calls: dental offices, HVAC, plumbers, you name it.</p></details>
+    <details><summary>Does it work for my kind of business?</summary><p>If customers call you and you sometimes can't pick up, yes. Roofers, water treatment and filtration companies, hardscapers, landscapers, HVAC, plumbers, electricians, pest control, pool service, cleaners, dental offices. Any service business that misses calls. Missly learns your services when you sign up and talks like your office would.</p></details>
     <details><summary>What if it says something weird?</summary><p>It sticks to your services, hours, and area, and never quotes prices. You can tell it anything it should always or never say when you sign up.</p></details>
   </div>
 </div></section>
@@ -203,6 +205,7 @@
   <nav><a href="privacy.html">Privacy Policy</a><a href="terms.html">SMS Terms</a></nav>
 </div></footer>
 
+<script src="industries.js"></script>
 <script src="demo.js"></script>
 <script>
 (function(){var b=document.getElementById("upsell"),m=document.getElementById("upsell-msg"),n=0;

@@ -7,11 +7,11 @@
   if (!callBtn) return;
 
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var URGENT = /\b(leak|leaking|leaks|water|dripping|drip|emergency|asap|urgent|storm|flood|hole|tarp)\b/i;
+  var IND = function () { return window.MisslyIndustry.get(); };
   var timers = [], stage = 0, answers = {}, busy = false, ghosts = 0, currentChips = [];
 
   function later(fn, ms) { timers.push(setTimeout(fn, reduce ? Math.min(ms, 300) : ms)); }
-  function biz() { return (bizInput.value || "").trim() || "Desert Ridge Roofing"; }
+  function biz() { return (bizInput.value || "").trim() || IND().name; }
   function show(id) {
     ["view-dial", "view-calling", "view-text"].forEach(function (v) { $(v).hidden = v !== id; });
   }
@@ -70,10 +70,10 @@
     var b = biz();
     if (n === 3) return "Last check-in from " + b + ". No pressure at all. If you still need help, just text or call this number anytime.";
     if (stage === 0) return n === 1
-      ? "Hi, just checking in from " + b + ". Still need help with your roof? Reply anytime."
-      : "Hi again from " + b + "! We'd still love to help. Is it a repair, a leak, or a new roof?";
+      ? "Hi, just checking in from " + b + ". " + IND().fu0[0]
+      : "Hi again from " + b + "! " + IND().fu0[1];
     if (stage === 1) return n === 1
-      ? (answers.urgent ? "Checking in from " + b + ". Is the leak still coming in? Send the address and we'll get someone out fast."
+      ? (answers.urgent ? "Checking in from " + b + ". " + IND().fuUrgent
                         : "Hi again from " + b + "! Still happy to help with that. What's the address of the home?")
       : "Hi! " + b + " here. We have openings this week. What's the address so we can get someone out?";
     return n === 1
@@ -151,7 +151,7 @@
     s.className = "stamp"; s.textContent = "Today, just now";
     thread.appendChild(s);
     botSay("Hi, this is " + biz() + ". Sorry we missed your call! How can we help? Reply STOP to opt out.", function () {
-      setChips(["I have a roof leak", "Need a quote on a new roof", "Just want an inspection"]);
+      setChips(IND().start);
       setInput(true); input.focus({ preventScroll: true });
     });
   }
@@ -171,24 +171,19 @@
 
     if (stage === 0) {
       answers.need = text;
-      answers.urgent = URGENT.test(text);
+      answers.urgent = IND().urgent.test(text);
       stage = 1;
-      var ask = answers.urgent
-        ? "Sorry to hear that! Is water coming in right now? And what’s the full address of the home?"
-        : /quote|new roof|replace|replacement/i.test(text)
-          ? "Happy to help with that. What’s the full address of the home, and about how old is the roof?"
-          : "We can help with that. What’s the full address of the home?";
+      var ask = answers.urgent ? IND().askUrgent : IND().quote.test(text) ? IND().askQuote : IND().askOther;
       botSay(ask, function () {
-        setChips(answers.urgent
-          ? ["Yes, it’s dripping. 6412 E Cactus Rd, Scottsdale", "Not right now. 2218 N 75th Pl, Scottsdale"]
-          : ["2218 N 75th Pl, Scottsdale. About 15 years old", "6412 E Cactus Rd, Scottsdale"]);
+        setChips(answers.urgent ? IND().chipsUrgent : IND().chipsAddr);
         setInput(true);
       });
     } else if (stage === 1) {
       answers.where = text;
-      if (URGENT.test(text) && /\b(yes|yeah|yep|it is|dripping)\b/i.test(text)) answers.urgent = true;
+      if (answers.urgent && /\b(not urgent|can wait|no rush|turned it off)\b/i.test(text)) answers.urgent = false;
+      if (!answers.urgent && IND().urgent.test(text) && IND().confirmUrgent.test(text)) answers.urgent = true;
       stage = 2;
-      botSay("Got it, thanks. What’s your name, and when’s a good time for someone to come take a look?", function () {
+      botSay(IND().askWhen, function () {
         setChips(["Maria. Tomorrow morning works", "Dave, anytime after 3pm today"]);
         setInput(true);
       });
@@ -249,6 +244,17 @@
     alertBox.hidden = true; restart.hidden = true; bizInput.disabled = false;
     setInput(false); show("view-dial");
   });
+
+  // switching industry: rename the demo business if it's still a sample name, and restart a demo in progress
+  window.MisslyIndustry.onChange(function (p) {
+    if (window.MisslyIndustry.isDefaultName(bizInput.value.trim()) || !bizInput.value.trim()) {
+      bizInput.value = p.name; $("dial-name").textContent = p.name;
+    }
+    if (!restart.hidden) restart.click();
+  });
+  if (window.MisslyIndustry.isDefaultName(bizInput.value.trim())) {
+    bizInput.value = IND().name; $("dial-name").textContent = IND().name;
+  }
 
   setInput(false);
 })();
