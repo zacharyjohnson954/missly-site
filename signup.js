@@ -1,13 +1,44 @@
 // Missly signup: 4 steps, sends to the Missly server, keeps a draft in this browser.
 (function () {
   var API = "https://missed-call-agent-production-f23175d2.up.railway.app/api/signup";
-  var DRAFT_KEY = "missly-signup-draft";
+  var PROGRESS_API = API + "-progress";
+  var DRAFT_KEY = "missly-signup-draft", TOKEN_KEY = "missly-signup-token";
   var form = document.getElementById("signup");
   if (!form) return;
   var steps = form.querySelectorAll(".step"), progress = document.querySelectorAll("#progress li"),
       back = document.getElementById("back"), next = document.getElementById("next"),
       err = document.getElementById("form-error"), review = document.getElementById("review");
-  var step = 1, total = steps.length, sending = false;
+  var step = 1, total = steps.length, sending = false, maxStep = 1;
+
+  // ---- progress saving: answers are saved to our server as people go, so our team can help
+  // anyone who gets stuck partway. Sent as text/plain so the browser needs no preflight.
+  var token = "";
+  try { token = localStorage.getItem(TOKEN_KEY) || ""; } catch (e) {}
+  if (!/^[a-z0-9]{16,40}$/.test(token)) {
+    token = Array.from({ length: 24 }, function () { return "abcdefghijklmnopqrstuvwxyz0123456789"[Math.floor(Math.random() * 36)]; }).join("");
+    try { localStorage.setItem(TOKEN_KEY, token); } catch (e) {}
+  }
+  var lastSent = "", saveTimer = null;
+  function saveProgress() {
+    clearTimeout(saveTimer); saveTimer = null;
+    var v = values();
+    if (v.company_url) return;
+    if (!(v.business_name || v.email || v.cell_phone || v.business_phone || v.owner_name)) return;
+    var body = { token: token, step: maxStep };
+    Object.keys(v).forEach(function (k) { if (v[k] && k !== "company_url") body[k] = v[k]; });
+    try { body.picked_trade = localStorage.getItem("missly-ind") || ""; } catch (e) {}
+    var json = JSON.stringify(body);
+    if (json === lastSent) return;
+    lastSent = json;
+    try {
+      fetch(PROGRESS_API, { method: "POST", headers: { "Content-Type": "text/plain" }, body: json, keepalive: true, mode: "cors" })
+        .catch(function () { lastSent = ""; });
+    } catch (e) {}
+  }
+  function saveSoon() { clearTimeout(saveTimer); saveTimer = setTimeout(saveProgress, 2500); }
+  form.addEventListener("focusout", saveSoon);
+  document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") saveProgress(); });
+  window.addEventListener("pagehide", saveProgress);
 
   var LABELS = {
     business_name: "Business name", industry: "Type of business", website: "Website",
@@ -30,6 +61,7 @@
   form.addEventListener("input", function (ev) {
     if (ev.target.getAttribute("aria-invalid")) { ev.target.removeAttribute("aria-invalid"); showError(""); }
     try { localStorage.setItem(DRAFT_KEY, JSON.stringify(values())); } catch (e) {}
+    saveSoon();
   });
 
   function values() {
@@ -64,6 +96,7 @@
 
   function go(n, initial) {
     step = n;
+    if (n > maxStep) { maxStep = n; if (!initial) saveProgress(); }
     steps.forEach(function (s, i) { s.hidden = i !== n - 1; });
     progress.forEach(function (li, i) {
       li.classList.toggle("done", i < n - 1);
@@ -106,12 +139,13 @@
   function submit() {
     if (sending) return;
     sending = true; next.disabled = true; next.textContent = "Sending…";
-    var data = values(); data.agreed = true;
+    var data = values(); data.agreed = true; data.draft = token;
+    clearTimeout(saveTimer); lastSent = "done";
     fetch(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) })
       .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
       .then(function (res) {
         if (!res.ok) throw new Error(res.error || "The signup didn't go through.");
-        try { localStorage.removeItem(DRAFT_KEY); } catch (e) {}
+        try { localStorage.removeItem(DRAFT_KEY); localStorage.removeItem(TOKEN_KEY); } catch (e) {}
         form.hidden = true;
         var done = document.getElementById("done");
         document.getElementById("done-msg").textContent = "Thanks, " + (data.owner_name.split(" ")[0] || "there") +
